@@ -1,0 +1,1 @@
+The main folder, where all the core source code is found. Note dependencies for this project are always located in Modules.
