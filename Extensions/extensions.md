@@ -1,1 +1,0 @@
-The extensions folder, where the end user can extend the program with their code. Note, the Plug folder is for plugins, which may or may not be code and is more feature-packed. This is practically en empty folder.

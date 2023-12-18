@@ -1,1 +1,0 @@
-The Build Folder, including whatever system I pick. Probably CMake or Meson idk, whichever works best.

@@ -1,1 +1,0 @@
-The plug-in folder, used for writing and loading plugins with the API and for dynamically linking them to the engine.

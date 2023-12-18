@@ -1,6 +1,0 @@
-version: 2.0
-shards:
-  opengl:
-    git: https://gitlab.com/arctic-fox/opengl.cr.git
-    version: 4.6.0+git.commit.b6bf36d2f24d833ece8a6366243062649476c3df
-

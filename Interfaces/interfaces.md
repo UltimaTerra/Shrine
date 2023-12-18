@@ -1,1 +1,0 @@
-The Interfaces folder, defining the API for all segments of the engine. This can also be extended, if you are working with the base.
