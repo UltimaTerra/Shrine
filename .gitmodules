@@ -1,0 +1,15 @@
+[submodule "External/graylib"]
+	path = External/graylib
+	url = https://github.com/UltimaTerra/graylib.git
+[submodule "External/ush7SDL"]
+	path = External/ush7SDL
+	url = https://github.com/UltimaTerra/ush7SDL.git
+[submodule "External/Fusion"]
+	path = External/Fusion
+	url = https://github.com/UltimaTerra/Fusion.git
+[submodule "External/sh7miniaudio"]
+	path = External/sh7miniaudio
+	url = https://github.com/UltimaTerra/sh7miniaudio.git
+[submodule "External/shrine_stc"]
+	path = External/shrine_stc
+	url = https://github.com/UltimaTerra/shrine_stc.git
