@@ -13,3 +13,6 @@
 [submodule "External/shrine_stc"]
 	path = External/shrine_stc
 	url = https://github.com/UltimaTerra/shrine_stc.git
+[submodule "External/haru"]
+	path = External/haru
+	url = https://github.com/UltimaTerra/haru
