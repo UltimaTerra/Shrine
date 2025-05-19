@@ -43,15 +43,6 @@ package Mode_Core is
    package Mode_UUID_Vectors is new Ada.Containers.Vectors (
       Index_Type   => Positive,
       Element_Type => UUID
-      -- Using 'aliased sh7any_tables.UUID' as the Element_Type:
-      -- 1. 'sh7any_tables.UUID': Explicitly states that the UUID type comes from your 'sh7any_tables' package.
-      --    This is clear even though 'use sh7any_tables;' makes 'UUID' directly visible.
-      --    Using just 'UUID' here would also work due to the 'use' clause.
-      -- 2. 'aliased': This is important if you intend to use your 'Static_Arena' type
-      --    (which is 'access all UUID' from sh7any_tables) to point to UUIDs *stored inside*
-      --    these vectors. 'aliased' allows you to take the 'Access attribute of vector elements.
-      --    If you don't need to point into the vector with 'Static_Arena', then just 'sh7any_tables.UUID' would suffice.
-      --    However, 'aliased' provides more flexibility for future use with access types.
    );
 
    -- Mode_Arena is now a subtype of the Vector type from our specialized instantiation.
@@ -85,9 +76,9 @@ package Mode_Core is
    -- This will likely involve setting its capacity based on the 'Current_Mode'.
    procedure Create_Mode_Arena (Arena : out Mode_Arena; For_Mode : Mode);
 
-   procedure Create_Mode (M : Mode; SM : Sub_Mode := Settings); -- Changed param names for clarity, 'Settings' as a plausible default
-   function Get_Mode (M : Mode) return Mode; -- This seems to just return its input? Perhaps intended Get_Current_Mode?
-   function Get_Sub_Mode_From_Modes (Modes : Mode_Array) return Sub_Mode; -- How does this determine *which* sub_mode from an array of modes?
+   procedure Create_Mode (M : Mode; SM : Sub_Mode := Settings); 
+   function Get_Mode (M : Mode) return Mode; 
+   function Get_Sub_Mode_From_Modes (Modes : Mode_Array) return Sub_Mode; 
    function Return_Mode_Metadata (M : Mode; SM : Sub_Mode) return Mode_Metadata;
    function Run_Mode_Lifecycle (M : Mode; SM : Sub_Mode := Settings) return Boolean;
    function Kill_Mode (M : Mode; SM : Sub_Mode := Settings) return Boolean;
@@ -98,24 +89,6 @@ package Mode_Core is
 
 
    type Shrine_Mode (M : Mode) is tagged record
-      -- This 'Mode' component shadows the discriminant 'M'.
-      -- It's usually better to have component names distinct from discriminant names
-      -- or use the discriminant 'M' directly if it serves the same purpose.
-      -- For example, if the component 'Mode_Discriminant_Copy : Mode;' is needed, or just rely on 'M'.
-      -- Let's assume the discriminant 'M' is the primary source of truth for the mode.
-
-      -- Data specific to each mode would go into these variant parts.
-      -- This could include the Mode_Arena (vector of UUIDs) if each Shrine_Mode instance
-      -- owns its UUID collection directly, or it could be managed elsewhere and associated.
-      -- For example:
-      -- Mode_UUID_Store : Mode_Arena; -- Each Shrine_Mode object gets its own vector for UUIDs.
-
-      -- Discriminant 'M' already stores the mode.
-      -- Mode_Component : Mode := M; -- If you need it as a readable component
-      -- If the Mode component in the record is meant to be the same as the discriminant M,
-            -- then you might not need it as a separate field, you can just use M.
-      --      Mode_Field : Mode; -- if it can be different from M, but discriminant usually locks variant.
-
       case M is -- Using the discriminant M directly
          when Preview =>
             Preview_Specific_Data : Integer; -- Example: Replace with actual data for Preview mode

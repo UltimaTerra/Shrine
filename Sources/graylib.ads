@@ -1,4 +1,4 @@
-
+with Interfaces.C;
 
 package Graylib is
 
