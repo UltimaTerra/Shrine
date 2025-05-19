@@ -1,0 +1,38 @@
+project Shrine is
+   for Source_Dirs use ("Sources"); -- Assuming main_cc.adb is in 'Sources'
+   for Object_Dir use "Artifacts";
+   for Exec_Dir use "Binary";
+   for Main use ("main_cc.adb");
+
+   -- Library Paths (assuming libraylib.a and libSDL3.a are in this directory)
+   Libs_Path  := "/home/nterra/work/Shrine/Libs"; -- Centralized library path
+
+   -- Include Path for your vendored headers
+   Include_Path := "/home/nterra/work/Shrine/Include";
+
+   package Compiler is
+      for Default_Switches ("ada") use (
+         "-g", "-Wall", "-gnatwa",  -- Existing flags
+         "-I" & Include_Path       -- Add path to your vendored headers (SDL3, Raylib, etc.)
+      );
+   end Compiler;
+
+   package Linker is
+      for Default_Switches ("ada") use (
+         "-L" & Libs_Path,       -- This will now use /home/nterra/work/Shrine/Libs
+         -- The -Wl,-rpath is for setting runtime library search path.
+         -- For purely static linking of libraylib.a, it's less critical for libraylib itself
+         -- but doesn't hurt. It's more for shared libraries.
+         "-Wl,-rpath," & Libs_Path,
+         "-lraylib",                   -- Link with libraylib.a or libraylib.so
+         -- Raylib static dependencies on Linux:
+         "-lGL", "-lm", "-lpthread", "-ldl", "-lrt", "-lX11",
+
+         -- SDL3 static dependencies on Linux:
+         "-lSDL3"  -- Uncomment if you want to link against SDL3 
+
+
+      );
+   end Linker;
+
+end Shrine;

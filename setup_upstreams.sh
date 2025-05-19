@@ -5,6 +5,7 @@ declare -A SUBMODULES=(
     ["graylib"]="https://github.com/raysan5/raylib.git"
     ["ush7SDL"]="https://github.com/libsdl-org/SDL.git"
     ["Fusion"]="https://github.com/vurtun/nuklear.git"
+    ["haru"]="https://github.com/libharu/libharu"
     ["sh7miniaudio"]="https://github.com/mackron/miniaudio.git"
     ["shrine_stc"]="https://github.com/tylov/STC.git"
 )
